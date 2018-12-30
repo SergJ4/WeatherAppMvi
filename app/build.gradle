@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 28
@@ -25,7 +25,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(path: ':core')
+
     implementation dep.kotlin.lib
     implementation dep.support.appCompat
     implementation dep.support.constraintLayout
+    implementation dep.multidex
+    implementation dep.ciceroneNavigator
 }
