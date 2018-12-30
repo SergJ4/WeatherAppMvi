@@ -1,0 +1,34 @@
+ext {
+
+    ver = [
+            espresso     : "3.0.2",
+            junit        : "4.12",
+            runner       : "1.0.2",
+            mockito      : "2.22.0",
+            hamcrest     : "1.3",
+            kotlinMock   : "1.8.8",
+    ]
+
+    testDep = [
+
+            espresso   : [
+                    core   : "com.android.support.test.espresso:espresso-core:$ver.espresso",
+                    contrib: "com.android.support.test.espresso:espresso-contrib:$ver.espresso",
+                    intents: "com.android.support.test.espresso:espresso-intents:$ver.espresso",
+            ],
+
+            junit      : "junit:junit:$ver.junit",
+
+            support    : [
+                    testRunner      : "com.android.support.test:runner:$ver.runner",
+                    testRules       : "com.android.support.test:rules:$ver.runner",
+                    testOrchestrator: "com.android.support.test:orchestrator:$ver.runner",
+            ],
+
+            mockito    : "org.mockito:mockito-core:$ver.mockito",
+
+            hamcrest   : "org.hamcrest:hamcrest-all:$ver.hamcrest",
+
+            kotlinMock : "io.mockk:mockk:$ver.kotlinMock",
+    ]
+}
