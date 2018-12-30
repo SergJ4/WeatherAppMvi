@@ -31,4 +31,7 @@ dependencies {
     implementation dep.ciceroneNavigator
     implementation dep.kotlin.lib
     implementation dep.support.appCompat
+
+    implementation dep.dagger.lib
+    kapt dep.dagger.compiler
 }

@@ -86,6 +86,8 @@ ext {
             dagger            : [
                     lib       : "com.google.dagger:dagger:$ver.dagger",
                     compiler  : "com.google.dagger:dagger-compiler:$ver.dagger",
+                    android   : "com.google.dagger:dagger-android:$ver.dagger",
+                    androidSupport : "com.google.dagger:dagger-android-support:$ver.dagger",
             ]
     ]
 }

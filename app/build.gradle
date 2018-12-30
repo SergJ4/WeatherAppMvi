@@ -33,4 +33,8 @@ dependencies {
     implementation dep.support.constraintLayout
     implementation dep.multidex
     implementation dep.ciceroneNavigator
+    implementation dep.dagger.lib
+
+    kapt dep.dagger.compiler
+
 }
