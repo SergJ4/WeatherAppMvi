@@ -1,6 +1,5 @@
-package com.example.core.di
+package com.example.repository.di
 
-import com.example.core.implementations.RouterImpl
 import com.example.core.interfaces.navigation.Router
 import dagger.Module
 import dagger.Provides
@@ -8,7 +7,7 @@ import ru.terrakok.cicerone.Cicerone
 import javax.inject.Singleton
 
 @Module
-class CoreModule {
+class RepoModule {
 
     @Provides
     @Singleton

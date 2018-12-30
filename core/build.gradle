@@ -28,7 +28,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation dep.ciceroneNavigator
     implementation dep.kotlin.lib
     implementation dep.support.appCompat
 

@@ -1,4 +1,4 @@
-package com.example.core.implementations
+package com.example.repository.di
 
 import androidx.fragment.app.Fragment
 import com.example.core.interfaces.navigation.NavigationModule
@@ -6,6 +6,10 @@ import com.example.core.interfaces.navigation.Router
 import ru.terrakok.cicerone.Screen
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
+/**
+ * I tried to move all dependencies on third-party frameworks to repository.
+ * That's why it's here
+ */
 internal class RouterImpl(private val router: ru.terrakok.cicerone.Router) : Router {
 
     private val modules = mutableSetOf<NavigationModule>()

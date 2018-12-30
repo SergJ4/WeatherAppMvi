@@ -27,6 +27,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(path: ':core')
+    implementation project(path: ':repository')
 
     implementation dep.kotlin.lib
     implementation dep.support.appCompat

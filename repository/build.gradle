@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -27,4 +28,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(path: ':core')
+
+    implementation dep.kotlin.lib
+    implementation dep.support.appCompat
+
+    implementation dep.ciceroneNavigator
+
+    implementation dep.dagger.lib
+    kapt dep.dagger.compiler
 }
