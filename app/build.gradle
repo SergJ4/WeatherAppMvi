@@ -35,6 +35,7 @@ dependencies {
     implementation dep.multidex
     implementation dep.ciceroneNavigator
     implementation dep.dagger.lib
+    implementation dep.dagger.android
 
     kapt dep.dagger.compiler
 

@@ -9,14 +9,14 @@ import dagger.Provides
 import ru.terrakok.cicerone.Navigator
 
 @Module
-class MainActivityModule {
+class MainActivityModule(
+    private val containerId: Int,
+    private val fm: FragmentManager,
+    private val activity: MainActivity
+) {
 
     @Provides
     @ActivityScope
-    fun provideNavigator(
-        fragmentContainerId: Int,
-        fm: FragmentManager,
-        activity: MainActivity
-    ): Navigator =
-        AppNavigator(activity, fm, fragmentContainerId)
+    fun provideNavigator(): Navigator =
+        AppNavigator(activity, fm, containerId)
 }

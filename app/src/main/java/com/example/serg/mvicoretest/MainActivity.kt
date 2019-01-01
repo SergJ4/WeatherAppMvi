@@ -2,29 +2,24 @@ package com.example.serg.mvicoretest
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.serg.mvicoretest.di.AppComponent
+import dagger.android.AndroidInjection
+import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    private val navigator = AppNavigator(
-        this,
-        supportFragmentManager,
-        R.id.fragmentsContainer
-    )
-
     @Inject
     internal lateinit var navigatorHolder: NavigatorHolder
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    @Inject
+    internal lateinit var navigator: Navigator
 
-        //Yes I know it's ugly!! But Dagger is ugly itself!! Why Are you using it people???
-        ((application as App).getAppComponent() as AppComponent)
-            .mainActivity()
-            .build()
-            .inject(this)
+    internal val containerId = R.id.fragmentsContainer
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
     }
