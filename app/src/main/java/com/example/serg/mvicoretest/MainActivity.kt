@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     internal lateinit var navigator: Navigator
     @Inject
     internal lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject
+    internal lateinit var viewModel: MainActivityViewModel
 
     internal val containerId = R.id.fragmentsContainer
 
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+        viewModel.handleNavigation(savedInstanceState)
     }
 
     override fun onResume() {

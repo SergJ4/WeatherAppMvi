@@ -29,6 +29,7 @@ dependencies {
     implementation project(path: ':core')
     implementation project(path: ':repository')
     implementation project(path: ':weatherlist')
+    implementation project(path: ':weathersingle')
 
     implementation dep.kotlin.lib
     implementation dep.support.appCompat
@@ -37,7 +38,8 @@ dependencies {
     implementation dep.ciceroneNavigator
     implementation dep.dagger.lib
     implementation dep.dagger.androidSupport
+    implementation dep.arch.viewmodel
 
     kapt dep.dagger.compiler
-
+    kapt dep.dagger.androidProcessor
 }

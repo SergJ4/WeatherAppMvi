@@ -2,7 +2,6 @@ package com.example.serg.mvicoretest.di
 
 import com.example.core.di.scopes.AppScope
 import com.example.core.interfaces.IApplication
-import com.example.core.interfaces.providers.ApplicationProvider
 import com.example.repository.di.RepoComponent
 import com.example.serg.mvicoretest.App
 import dagger.BindsInstance
@@ -13,11 +12,12 @@ import dagger.android.AndroidInjectionModule
 @Component(
     modules = [
         AndroidInjectionModule::class,
-        ActivityModule::class
+        ActivityModule::class,
+        AppModule::class
     ],
     dependencies = [RepoComponent::class]
 )
-interface AppComponent : ApplicationProvider {
+interface AppComponent {
     fun inject(app: App)
 
     @Component.Builder

@@ -32,9 +32,6 @@ dependencies {
     implementation project(path: ':core')
 
     implementation dep.kotlin.lib
-    implementation dep.support.appCompat
-
-    implementation dep.ciceroneNavigator
 
     implementation dep.dagger.lib
     kapt dep.dagger.compiler

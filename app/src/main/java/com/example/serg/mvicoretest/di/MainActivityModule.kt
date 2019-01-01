@@ -1,9 +1,14 @@
 package com.example.serg.mvicoretest.di
 
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.core.di.scopes.ActivityScope
+import com.example.core.interfaces.Router
 import com.example.serg.mvicoretest.AppNavigator
 import com.example.serg.mvicoretest.MainActivity
+import com.example.serg.mvicoretest.MainActivityViewModel
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Navigator
@@ -19,4 +24,17 @@ class MainActivityModule(
     @ActivityScope
     fun provideNavigator(): Navigator =
         AppNavigator(activity, fm, containerId)
+
+    @Provides
+    @ActivityScope
+    fun viewModelFactory(router: Router): ViewModelProvider.Factory =
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                MainActivityViewModel(router) as T
+        }
+
+    @Provides
+    @ActivityScope
+    fun viewModel(factory: ViewModelProvider.Factory): MainActivityViewModel =
+        ViewModelProviders.of(activity, factory).get(MainActivityViewModel::class.java)
 }

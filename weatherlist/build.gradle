@@ -35,4 +35,5 @@ dependencies {
     implementation dep.dagger.lib
     implementation dep.dagger.androidSupport
     kapt dep.dagger.compiler
+    kapt dep.dagger.androidProcessor
 }
