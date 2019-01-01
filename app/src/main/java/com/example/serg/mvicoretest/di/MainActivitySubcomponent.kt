@@ -5,7 +5,7 @@ import com.example.serg.mvicoretest.MainActivity
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 
-@Subcomponent(modules = [MainActivityModule::class])
+@Subcomponent(modules = [MainActivityModule::class, FragmentModule::class])
 @ActivityScope
 interface MainActivitySubcomponent : AndroidInjector<MainActivity> {
 

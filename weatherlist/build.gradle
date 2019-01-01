@@ -1,43 +1,38 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
-
 
 android {
     compileSdkVersion 28
+
+
+
     defaultConfig {
-        applicationId "com.example.serg.mvicoretest"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     implementation project(path: ':core')
-    implementation project(path: ':repository')
-    implementation project(path: ':weatherlist')
 
     implementation dep.kotlin.lib
-    implementation dep.support.appCompat
-    implementation dep.support.constraintLayout
-    implementation dep.multidex
-    implementation dep.ciceroneNavigator
+
     implementation dep.dagger.lib
     implementation dep.dagger.androidSupport
-
     kapt dep.dagger.compiler
-
 }
