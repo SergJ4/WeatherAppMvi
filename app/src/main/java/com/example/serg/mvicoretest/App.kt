@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.example.core.di.CoreComponent
-import com.example.core.interfaces.IApplication
 import com.example.repository.di.DaggerRepoComponent
 import com.example.serg.mvicoretest.di.DaggerAppComponent
 import dagger.android.AndroidInjector
@@ -13,7 +12,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
 
-class App : MultiDexApplication(), IApplication, HasActivityInjector {
+class App : MultiDexApplication(), HasActivityInjector {
 
     @Inject
     lateinit var activityInjector: DispatchingAndroidInjector<Activity>
@@ -26,8 +25,13 @@ class App : MultiDexApplication(), IApplication, HasActivityInjector {
         DaggerAppComponent
             .builder()
             .app(this)
-            .repoComponent(DaggerRepoComponent.create())
-            .coreComponent(CoreComponent.init())
+            .repoComponent(
+                DaggerRepoComponent
+                    .builder()
+                    .appContext(this)
+                    .coreComponent(CoreComponent.init())
+                    .build()
+            )
             .build()
             .inject(this)
     }

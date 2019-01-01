@@ -1,8 +1,7 @@
 package com.example.serg.mvicoretest.di
 
-import com.example.core.di.CoreComponent
+import android.content.Context
 import com.example.core.di.scopes.AppScope
-import com.example.core.interfaces.IApplication
 import com.example.repository.di.RepoComponent
 import com.example.serg.mvicoretest.App
 import dagger.BindsInstance
@@ -16,7 +15,7 @@ import dagger.android.AndroidInjectionModule
         ActivityModule::class,
         AppModule::class
     ],
-    dependencies = [RepoComponent::class, CoreComponent::class]
+    dependencies = [RepoComponent::class]
 )
 interface AppComponent {
     fun inject(app: App)
@@ -24,11 +23,9 @@ interface AppComponent {
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun app(context: IApplication): Builder
+        fun app(context: Context): Builder
 
         fun repoComponent(repoComponent: RepoComponent): Builder
-
-        fun coreComponent(coreComponent: CoreComponent): Builder
 
         fun build(): AppComponent
     }
