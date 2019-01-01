@@ -30,7 +30,8 @@ dependencies {
 
     implementation dep.kotlin.lib
     implementation dep.support.appCompat
-
+    implementation dep.timber
+    
     implementation dep.dagger.lib
     kapt dep.dagger.compiler
 }

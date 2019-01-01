@@ -20,6 +20,7 @@ ext {
             places            : "16.0.0",
             multiDex          : "1.0.3",
             dagger            : "2.20",
+            mvicore           : "1.1.4"
     ]
 
     //Version
@@ -89,6 +90,8 @@ ext {
                     android   : "com.google.dagger:dagger-android:$ver.dagger",
                     androidSupport : "com.google.dagger:dagger-android-support:$ver.dagger",
                     androidProcessor: "com.google.dagger:dagger-android-processor:$ver.dagger"
-            ]
+            ],
+
+            mvicore           : "com.github.badoo.mvicore:mvicore:$ver.mvicore"
     ]
 }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
+import com.example.core.di.CoreComponent
 import com.example.core.interfaces.IApplication
 import com.example.repository.di.DaggerRepoComponent
 import com.example.serg.mvicoretest.di.DaggerAppComponent
@@ -26,6 +27,7 @@ class App : MultiDexApplication(), IApplication, HasActivityInjector {
             .builder()
             .app(this)
             .repoComponent(DaggerRepoComponent.create())
+            .coreComponent(CoreComponent.init())
             .build()
             .inject(this)
     }

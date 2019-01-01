@@ -39,6 +39,7 @@ dependencies {
     implementation dep.dagger.lib
     implementation dep.dagger.androidSupport
     implementation dep.arch.viewmodel
+    implementation dep.mvicore
 
     kapt dep.dagger.compiler
     kapt dep.dagger.androidProcessor
