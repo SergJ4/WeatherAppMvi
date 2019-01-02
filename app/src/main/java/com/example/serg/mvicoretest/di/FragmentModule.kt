@@ -1,14 +1,20 @@
 package com.example.serg.mvicoretest.di
 
-import androidx.fragment.app.ListFragment
-import com.example.weather.di.ListFragmentModule
+import com.example.weather.ListFragment
+import com.example.weather.di.ListFragmentSubcomponent
+import dagger.Binds
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import dagger.android.AndroidInjector
+import dagger.multibindings.ClassKey
+import dagger.multibindings.IntoMap
 
-
-@Module
+@Module(subcomponents = [ListFragmentSubcomponent::class])
 internal abstract class FragmentModule {
 
-    @ContributesAndroidInjector(modules = [ListFragmentModule::class])
-    abstract fun listFragment(): ListFragment
+    @Binds
+    @IntoMap
+    @ClassKey(ListFragment::class)
+    internal abstract fun bindListFragmentInjectorFactory(
+        builder: ListFragmentSubcomponent.Builder
+    ): AndroidInjector.Factory<*>
 }

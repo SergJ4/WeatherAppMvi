@@ -30,6 +30,7 @@ dependencies {
 
     implementation dep.kotlin.lib
     implementation dep.support.appCompat
+    implementation dep.support.design
     implementation dep.timber
     implementation dep.rxjava2.lib
     implementation dep.rxjava2.android

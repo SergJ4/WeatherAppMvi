@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="weather_city_card_title_color">@color/white</color>
+    <color name="weather_city_card_temperature_default_color">@color/black</color>
+    <color name="detail_weather_city_title_color">@color/white</color>
+    <color name="detail_weather_temperature_color">@color/white</color>
+    <color name="date_font_color">@color/white</color>
+
+    <color name="temperature_cold">@color/accent</color>
+    <color name="temperature_very_cold">@color/dark_blue</color>
+    <color name="temperature_warm">@color/brown</color>
+    <color name="temperature_hot">@color/red</color>
+
+    <color name="details_card_background">@color/primary_with_alpha</color>
+</resources>

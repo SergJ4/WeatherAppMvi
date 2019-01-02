@@ -2,6 +2,8 @@ package com.example.serg.mvicoretest.di
 
 import android.content.Context
 import com.example.core.di.scopes.AppScope
+import com.example.core.interfaces.Logger
+import com.example.core.interfaces.WeatherRepository
 import com.example.repository.di.RepoComponent
 import com.example.serg.mvicoretest.App
 import dagger.BindsInstance
@@ -19,6 +21,10 @@ import dagger.android.AndroidInjectionModule
 )
 interface AppComponent {
     fun inject(app: App)
+
+    fun weatherRepository(): WeatherRepository
+
+    fun logger(): Logger
 
     @Component.Builder
     interface Builder {
