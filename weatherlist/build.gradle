@@ -36,6 +36,7 @@ dependencies {
     implementation dep.arch.viewmodel
     implementation dep.support.recycler
     implementation dep.support.design
+    implementation dep.mvicore
 
     kapt dep.dagger.compiler
     kapt dep.dagger.androidProcessor

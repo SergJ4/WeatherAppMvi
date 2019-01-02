@@ -22,19 +22,15 @@ class MainActivityModule(
 
     @Provides
     @ActivityScope
-    fun provideNavigator(): Navigator =
-        AppNavigator(activity, fm, containerId)
+    fun provideNavigator(): Navigator = AppNavigator(activity, fm, containerId)
 
     @Provides
     @ActivityScope
-    fun viewModelFactory(router: Router): ViewModelProvider.Factory =
-        object : ViewModelProvider.Factory {
+    fun viewModel(router: Router): MainActivityViewModel {
+        val factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
                 MainActivityViewModel(router) as T
         }
-
-    @Provides
-    @ActivityScope
-    fun viewModel(factory: ViewModelProvider.Factory): MainActivityViewModel =
-        ViewModelProviders.of(activity, factory).get(MainActivityViewModel::class.java)
+        return ViewModelProviders.of(activity, factory).get(MainActivityViewModel::class.java)
+    }
 }
