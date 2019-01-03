@@ -8,9 +8,11 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.core.di.scopes.RepoScope
 import com.example.core.interfaces.ApiErrors
+import com.example.core.interfaces.ImageLoader
 import com.example.core.interfaces.Logger
 import com.example.core.interfaces.WeatherRepository
 import com.example.repository.BuildConfig
+import com.example.repository.ImageLoaderImpl
 import com.example.repository.datasource.api.ApiDataSource
 import com.example.repository.datasource.api.ConnectivityInterceptor
 import com.example.repository.datasource.api.TranslatorApi
@@ -152,5 +154,11 @@ class RepoModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @RepoScope
+    fun provideImageLoader(): ImageLoader {
+        return ImageLoaderImpl()
     }
 }

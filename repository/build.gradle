@@ -49,7 +49,9 @@ dependencies {
     implementation dep.retrofit.gson_converter
     implementation dep.retrofit.rxjava_adapter
     implementation dep.retrofit.interceptor
+    implementation dep.glide.lib
 
+    kapt dep.glide.annotations
     kapt dep.room.compiler
     kapt dep.dagger.compiler
 }

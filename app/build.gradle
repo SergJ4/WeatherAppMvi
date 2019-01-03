@@ -33,7 +33,6 @@ dependencies {
 
     implementation dep.kotlin.lib
     implementation dep.support.appCompat
-    implementation dep.support.constraintLayout
     implementation dep.multidex
     implementation dep.ciceroneNavigator
     implementation dep.dagger.lib

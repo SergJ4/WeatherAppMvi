@@ -2,6 +2,7 @@ package com.example.serg.mvicoretest.di
 
 import android.content.Context
 import com.example.core.di.scopes.AppScope
+import com.example.core.interfaces.ImageLoader
 import com.example.core.interfaces.Logger
 import com.example.core.interfaces.WeatherRepository
 import com.example.repository.di.RepoComponent
@@ -25,6 +26,8 @@ interface AppComponent {
     fun weatherRepository(): WeatherRepository
 
     fun logger(): Logger
+
+    fun imageLoader(): ImageLoader
 
     @Component.Builder
     interface Builder {

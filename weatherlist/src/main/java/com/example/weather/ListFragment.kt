@@ -1,15 +1,12 @@
 package com.example.weather
 
-import android.content.Context
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import dagger.android.support.AndroidSupportInjection
+import com.example.core.BaseFragment
+import com.example.weather.adapter.CityWeatherItem
 import javax.inject.Inject
 
-class ListFragment : Fragment() {
+class ListFragment : BaseFragment() {
+
+    override val layoutRes: Int = R.layout.city_weather_list_layout
 
     @Inject
     internal lateinit var viewModel: ListFragmentViewModel
@@ -18,14 +15,10 @@ class ListFragment : Fragment() {
         fun getInstance() = ListFragment()
     }
 
-    override fun onAttach(context: Context?) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
+    sealed class UiEvent {
+        object SwipeRefresh : UiEvent()
+        object AddCityClick : UiEvent()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.city_weather_list_layout, container, false)
+    data class Model(val listItems: List<CityWeatherItem>, val isLoading: Boolean)
 }

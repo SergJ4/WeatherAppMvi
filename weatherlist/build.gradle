@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
@@ -34,10 +35,15 @@ dependencies {
     implementation dep.dagger.lib
     implementation dep.dagger.androidSupport
     implementation dep.arch.viewmodel
-    implementation dep.support.recycler
     implementation dep.support.design
+    implementation dep.support.constraintLayout
     implementation dep.mvicore
+    implementation dep.recyclerAdapter
 
     kapt dep.dagger.compiler
     kapt dep.dagger.androidProcessor
+}
+
+androidExtensions {
+    experimental = true
 }

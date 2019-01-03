@@ -29,12 +29,14 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation dep.kotlin.lib
+    implementation dep.kotlin.anko_commons
     implementation dep.support.appCompat
     implementation dep.support.design
     implementation dep.timber
     implementation dep.rxjava2.lib
     implementation dep.rxjava2.android
 
+    implementation dep.dagger.androidSupport
     implementation dep.dagger.lib
     kapt dep.dagger.compiler
 }
