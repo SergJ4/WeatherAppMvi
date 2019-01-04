@@ -1,9 +1,8 @@
 package com.example.weather.adapter
 
-import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core.extensions.color
+import com.example.core.interfaces.Colors
 import com.example.core.interfaces.ImageLoader
 import com.example.core.models.City
 import com.example.core.models.Weather
@@ -15,7 +14,7 @@ import eu.davidea.flexibleadapter.items.IFlexible
 class CityWeatherItem(
     internal val imageLoader: ImageLoader,
     private val city: City,
-    private val context: Context,
+    private val colors: Colors,
     internal val clickListener: (cityId: Long) -> Unit
 ) : AbstractFlexibleItem<CityWeatherViewHolder>() {
 
@@ -42,11 +41,11 @@ class CityWeatherItem(
         get() {
             val temp = currentWeather?.temperature ?: 0f
             return when {
-                temp < -10 -> context.color(R.color.temperature_very_cold)
-                temp < 10 -> context.color(R.color.temperature_cold)
-                temp < 25 -> context.color(R.color.temperature_warm)
-                temp >= 25 -> context.color(R.color.temperature_hot)
-                else -> context.color(R.color.weather_city_card_temperature_default_color)
+                temp < -10 -> colors.get(R.color.temperature_very_cold)
+                temp < 10 -> colors.get(R.color.temperature_cold)
+                temp < 25 -> colors.get(R.color.temperature_warm)
+                temp >= 25 -> colors.get(R.color.temperature_hot)
+                else -> colors.get(R.color.weather_city_card_temperature_default_color)
             }
         }
 

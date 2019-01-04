@@ -7,11 +7,15 @@ import com.example.core.SchedulersProvider
 import com.example.core.di.scopes.FragmentScope
 import com.example.core.models.City
 import com.example.core.usecase.RefreshWeatherRepo
+import com.example.weather.usecase.FetchCitiesWithWeather
 import io.reactivex.Observable
 import javax.inject.Inject
 
 @FragmentScope
-class ListFragmentFeature @Inject constructor(refreshWeatherRepo: RefreshWeatherRepo) :
+class ListFragmentFeature @Inject constructor(
+    refreshWeatherRepo: RefreshWeatherRepo,
+    fetchCitiesWithWeather: FetchCitiesWithWeather
+) :
     ActorReducerFeature<
             ListFragmentFeature.Wish,
             ListFragmentFeature.Effect,
@@ -19,7 +23,7 @@ class ListFragmentFeature @Inject constructor(refreshWeatherRepo: RefreshWeather
             ListFragmentFeature.News
             >(
         initialState = State(listOf(), true),
-        actor = ActorImpl(refreshWeatherRepo),
+        actor = ActorImpl(refreshWeatherRepo, fetchCitiesWithWeather),
         reducer = ReducerImpl()
     ) {
 
@@ -29,7 +33,8 @@ class ListFragmentFeature @Inject constructor(refreshWeatherRepo: RefreshWeather
     }
 
     sealed class Effect {
-        data class Refresh(val isStarted: Boolean) : Effect()
+        object Refresh : Effect()
+        data class DataLoaded(val cities: List<City>) : Effect()
     }
 
     data class State(
@@ -37,23 +42,26 @@ class ListFragmentFeature @Inject constructor(refreshWeatherRepo: RefreshWeather
         val isLoading: Boolean
     )
 
-    sealed class News {
+    sealed class News
 
-    }
-
-    class ActorImpl(private val refreshWeatherRepo: RefreshWeatherRepo) :
+    class ActorImpl(
+        private val refreshWeatherRepo: RefreshWeatherRepo,
+        private val fetchCitiesWithWeather: FetchCitiesWithWeather
+    ) :
         Actor<State, Wish, Effect> {
         override fun invoke(state: State, wish: Wish): Observable<out Effect> =
             when (wish) {
                 Wish.ShowCitiesList -> TODO()
 
-                Wish.Refresh -> Observable
-                    .just(Effect.Refresh(true))
-                    .flatMapCompletable { refreshWeatherRepo() }
-                    .andThen { Observable.just(Effect.Refresh(false)) }
+                Wish.Refresh -> refreshWeatherRepo()
+                    .andThen(fetchCitiesWithWeather())
+                    .map {
+                        Effect.DataLoaded(it) as Effect
+                    }
+                    .toObservable()
                     .subscribeOn(SchedulersProvider.io())
                     .observeOn(SchedulersProvider.ui())
-                    .toObservable()
+                    .startWith(Observable.just(Effect.Refresh))
             }
     }
 
@@ -61,7 +69,10 @@ class ListFragmentFeature @Inject constructor(refreshWeatherRepo: RefreshWeather
         override fun invoke(state: State, effect: Effect): State =
             when (effect) {
                 is Effect.Refresh -> {
-                    state.copy(list = state.list, isLoading = effect.isStarted)
+                    state.copy(list = state.list, isLoading = true)
+                }
+                is Effect.DataLoaded -> {
+                    state.copy(list = effect.cities, isLoading = false)
                 }
             }
     }

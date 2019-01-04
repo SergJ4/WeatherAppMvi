@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.core.di.scopes.FragmentScope
+import com.example.core.interfaces.Colors
+import com.example.core.interfaces.ImageLoader
+import com.example.core.interfaces.Router
 import com.example.weather.ListFragment
 import com.example.weather.ListFragmentFeature
 import com.example.weather.ListFragmentViewModel
@@ -15,10 +18,15 @@ class ListFragmentModule(private val listFragment: ListFragment) {
 
     @Provides
     @FragmentScope
-    fun provideViewModel(listFragmentFeature: ListFragmentFeature): ListFragmentViewModel {
+    fun provideViewModel(
+        listFragmentFeature: ListFragmentFeature,
+        imageLoader: ImageLoader,
+        router: Router,
+        colors: Colors
+    ): ListFragmentViewModel {
         val factory = object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                ListFragmentViewModel(listFragmentFeature) as T
+                ListFragmentViewModel(listFragmentFeature, imageLoader, router, colors) as T
         }
         return ViewModelProviders.of(listFragment, factory).get(ListFragmentViewModel::class.java)
     }

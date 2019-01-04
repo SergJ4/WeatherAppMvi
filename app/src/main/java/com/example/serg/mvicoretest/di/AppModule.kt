@@ -1,6 +1,9 @@
 package com.example.serg.mvicoretest.di
 
+import android.content.Context
 import com.example.core.di.scopes.AppScope
+import com.example.core.interfaces.Colors
+import com.example.serg.mvicoretest.ColorsImpl
 import com.example.serg.mvicoretest.RouterImpl
 import dagger.Module
 import dagger.Provides
@@ -29,4 +32,8 @@ class AppModule {
     fun provideRouter(ciceroneRouter: ru.terrakok.cicerone.Router): com.example.core.interfaces.Router {
         return RouterImpl(ciceroneRouter)
     }
+
+    @Provides
+    @AppScope
+    fun colors(appContext: Context): Colors = ColorsImpl(appContext)
 }

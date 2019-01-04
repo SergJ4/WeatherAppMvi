@@ -21,6 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -38,7 +43,8 @@ dependencies {
     implementation dep.dagger.lib
     implementation dep.dagger.androidSupport
     implementation dep.arch.viewmodel
-    implementation dep.mvicore
+    implementation dep.rxjava2.lib
+    implementation dep.mvicore.lib
 
     kapt dep.dagger.compiler
     kapt dep.dagger.androidProcessor
