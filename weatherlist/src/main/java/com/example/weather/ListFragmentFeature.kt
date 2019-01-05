@@ -6,21 +6,18 @@ import com.badoo.mvicore.element.Reducer
 import com.badoo.mvicore.feature.ActorReducerFeature
 import com.example.core.SchedulersProvider
 import com.example.core.di.scopes.FragmentScope
-import com.example.core.interfaces.DataWrapper
 import com.example.core.models.City
+import com.example.core.models.SearchCity
 import com.example.core.usecase.RefreshWeatherRepo
 import com.example.weather.usecase.AddCity
 import com.example.weather.usecase.FetchCitiesWithWeather
-import com.example.weather.usecase.GooglePlaces
 import io.reactivex.Observable
 import javax.inject.Inject
-import javax.inject.Provider
 
 @FragmentScope
 class ListFragmentFeature @Inject constructor(
     refreshWeatherRepo: RefreshWeatherRepo,
     fetchCitiesWithWeather: FetchCitiesWithWeather,
-    googlePlacesProvider: Provider<GooglePlaces>,
     addCity: AddCity
 ) :
     ActorReducerFeature<
@@ -33,7 +30,6 @@ class ListFragmentFeature @Inject constructor(
         actor = ActorImpl(
             refreshWeatherRepo,
             fetchCitiesWithWeather,
-            googlePlacesProvider,
             addCity
         ),
         reducer = ReducerImpl(),
@@ -41,13 +37,8 @@ class ListFragmentFeature @Inject constructor(
     ) {
 
     sealed class Wish {
-        object ShowCitiesList : Wish()
         object Refresh : Wish()
-        data class ActivityResult(
-            val requestCode: Int,
-            val resultCode: Int,
-            val data: DataWrapper
-        ) : Wish()
+        data class CityChosen(val city: SearchCity) : Wish()
     }
 
     sealed class Effect {
@@ -70,28 +61,11 @@ class ListFragmentFeature @Inject constructor(
     class ActorImpl(
         private val refreshWeatherRepo: RefreshWeatherRepo,
         private val fetchCitiesWithWeather: FetchCitiesWithWeather,
-        private val googlePlacesProvider: Provider<GooglePlaces>,
         private val addCity: AddCity
     ) :
         Actor<State, Wish, Effect> {
         override fun invoke(state: State, wish: Wish): Observable<out Effect> =
             when (wish) {
-                Wish.ShowCitiesList -> {
-                    val googlePlaces = googlePlacesProvider.get()
-                    Observable
-                        .fromCallable { googlePlaces.showCitiesList() }
-                        .flatMap { googlePlaces.selectedCity() }
-                        .take(1)
-                        .flatMap {
-                            addCity(it)
-                                .subscribeOn(SchedulersProvider.io())
-                                .observeOn(SchedulersProvider.ui())
-                                .map { Effect.CityAdded as Effect }
-                                .startWith(Effect.Loading)
-                                .onErrorReturn { Effect.ErrorChoosingCity }
-                        }
-                        .onErrorReturn { Effect.ErrorChoosingCity }
-                }
 
                 Wish.Refresh -> refreshWeatherRepo()
                     .andThen(fetchCitiesWithWeather())
@@ -103,12 +77,12 @@ class ListFragmentFeature @Inject constructor(
                     .observeOn(SchedulersProvider.ui())
                     .startWith(Observable.just(Effect.Loading))
 
-                is Wish.ActivityResult -> Observable.fromCallable {
-                    googlePlacesProvider
-                        .get()
-                        .onActivityResult(wish.requestCode, wish.resultCode, wish.data)
-                }
-                    .map { Effect.CityAdded }
+                is Wish.CityChosen -> addCity(wish.city)
+                    .subscribeOn(SchedulersProvider.io())
+                    .observeOn(SchedulersProvider.ui())
+                    .map { Effect.CityAdded as Effect }
+                    .startWith(Effect.Loading)
+                    .onErrorReturn { Effect.ErrorChoosingCity }
             }
     }
 

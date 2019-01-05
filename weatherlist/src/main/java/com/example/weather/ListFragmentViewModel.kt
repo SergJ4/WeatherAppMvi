@@ -34,15 +34,11 @@ class ListFragmentViewModel(
         Consumer { event ->
             when (event) {
                 ListFragment.UiEvent.SwipeRefresh -> listFeature.accept(ListFragmentFeature.Wish.Refresh)
-                ListFragment.UiEvent.AddCityClick -> listFeature.accept(ListFragmentFeature.Wish.ShowCitiesList)
-                is ListFragment.UiEvent.ActivityResult ->
-                    listFeature.accept(
-                        ListFragmentFeature.Wish.ActivityResult(
-                            event.requestCode,
-                            event.resultCode,
-                            event.data
-                        )
+                is ListFragment.UiEvent.CityChosen -> listFeature.accept(
+                    ListFragmentFeature.Wish.CityChosen(
+                        event.city
                     )
+                )
             }
         }
 

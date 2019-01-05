@@ -1,6 +1,5 @@
 package com.example.weather.di
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -39,8 +38,4 @@ class ListFragmentModule(private val listFragment: ListFragment) {
         }
         return ViewModelProviders.of(listFragment, factory).get(ListFragmentViewModel::class.java)
     }
-
-    @Provides
-    @FragmentScope
-    fun provideFragment(): Fragment = listFragment
 }

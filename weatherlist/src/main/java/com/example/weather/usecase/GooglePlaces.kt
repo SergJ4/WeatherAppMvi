@@ -1,9 +1,9 @@
 package com.example.weather.usecase
 
 import android.app.Activity.RESULT_OK
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import com.example.core.SchedulersProvider
-import com.example.core.interfaces.DataWrapper
 import com.example.core.interfaces.Logger
 import com.example.core.interfaces.Translator
 import com.example.core.models.SearchCity
@@ -13,9 +13,8 @@ import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 import java.util.*
-import javax.inject.Inject
 
-class GooglePlaces @Inject constructor(
+class GooglePlaces(
     private val logger: Logger,
     private val translator: Translator,
     private val fragment: Fragment
@@ -50,9 +49,8 @@ class GooglePlaces @Inject constructor(
     fun onActivityResult(
         requestCode: Int,
         resultCode: Int,
-        wrapper: DataWrapper
+        resultIntent: Intent?
     ): Boolean {
-        val resultIntent = wrapper.data
 
         return if (requestCode == this.requestCode &&
             resultCode == RESULT_OK &&
