@@ -103,15 +103,20 @@ class RepoModule {
     fun weatherRepo(
         apiDataSource: ApiDataSource,
         dbDataSource: DbDataSource,
-        logger: Logger
+        logger: Logger,
+        apiErrors: ApiErrors
     ): WeatherRepository =
         com.example.repository.WeatherRepository(
             apiDataSource,
             dbDataSource,
             CompositeDisposable(),
-            ApiErrors(),
+            apiErrors,
             logger
         )
+
+    @Provides
+    @RepoScope
+    fun apiErrors(): ApiErrors = ApiErrors()
 
     private fun createRetrofit(
         appContext: Context,

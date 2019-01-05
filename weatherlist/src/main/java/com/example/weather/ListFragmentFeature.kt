@@ -1,11 +1,17 @@
 package com.example.weather
 
 import com.badoo.mvicore.element.Actor
+import com.badoo.mvicore.element.Bootstrapper
 import com.badoo.mvicore.element.NewsPublisher
 import com.badoo.mvicore.element.Reducer
 import com.badoo.mvicore.feature.ActorReducerFeature
 import com.example.core.SchedulersProvider
 import com.example.core.di.scopes.FragmentScope
+import com.example.core.exceptions.Error
+import com.example.core.exceptions.NetworkConnectionError
+import com.example.core.exceptions.RefreshDataError
+import com.example.core.exceptions.ResourceNotFoundError
+import com.example.core.interfaces.ApiErrors
 import com.example.core.models.City
 import com.example.core.models.SearchCity
 import com.example.core.usecase.RefreshWeatherRepo
@@ -18,7 +24,8 @@ import javax.inject.Inject
 class ListFragmentFeature @Inject constructor(
     refreshWeatherRepo: RefreshWeatherRepo,
     fetchCitiesWithWeather: FetchCitiesWithWeather,
-    addCity: AddCity
+    addCity: AddCity,
+    apiErrors: ApiErrors
 ) :
     ActorReducerFeature<
             ListFragmentFeature.Wish,
@@ -33,12 +40,14 @@ class ListFragmentFeature @Inject constructor(
             addCity
         ),
         reducer = ReducerImpl(),
-        newsPublisher = NewsPublisherImpl()
+        newsPublisher = NewsPublisherImpl(),
+        bootstrapper = BootstrapperImpl(apiErrors)
     ) {
 
     sealed class Wish {
         object Refresh : Wish()
         data class CityChosen(val city: SearchCity) : Wish()
+        data class ApiError(val error: Error) : Wish()
     }
 
     sealed class Effect {
@@ -46,7 +55,7 @@ class ListFragmentFeature @Inject constructor(
         data class DataLoaded(val cities: List<City>) : Effect()
         object ErrorChoosingCity : Effect()
         object CityAdded : Effect()
-
+        object NoNeedToAct : Effect()
     }
 
     data class State(
@@ -56,6 +65,8 @@ class ListFragmentFeature @Inject constructor(
 
     sealed class News {
         object ErrorChoosingCity : News()
+        object NetworkConnectionError : News()
+        object CityNotFoundError : News()
     }
 
     class ActorImpl(
@@ -66,7 +77,6 @@ class ListFragmentFeature @Inject constructor(
         Actor<State, Wish, Effect> {
         override fun invoke(state: State, wish: Wish): Observable<out Effect> =
             when (wish) {
-
                 Wish.Refresh -> refreshWeatherRepo()
                     .andThen(fetchCitiesWithWeather())
                     .map {
@@ -83,6 +93,8 @@ class ListFragmentFeature @Inject constructor(
                     .map { Effect.CityAdded as Effect }
                     .startWith(Effect.Loading)
                     .onErrorReturn { Effect.ErrorChoosingCity }
+
+                is Wish.ApiError -> Observable.just(Effect.NoNeedToAct)
             }
     }
 
@@ -93,16 +105,25 @@ class ListFragmentFeature @Inject constructor(
                 is Effect.DataLoaded -> state.copy(list = effect.cities, isLoading = false)
                 Effect.ErrorChoosingCity -> state.copy(list = state.list, isLoading = false)
                 Effect.CityAdded -> state.copy(list = state.list, isLoading = false)
+                Effect.NoNeedToAct -> state
             }
     }
 
     class NewsPublisherImpl : NewsPublisher<Wish, Effect, State, News> {
-        override fun invoke(wish: Wish, effect: Effect, state: State): News? {
-            return if (effect == Effect.ErrorChoosingCity) {
-                News.ErrorChoosingCity
-            } else {
-                null
-            }
+        override fun invoke(wish: Wish, effect: Effect, state: State): News? = when {
+            effect == Effect.ErrorChoosingCity -> News.ErrorChoosingCity
+            wish is Wish.ApiError -> mapApiError(wish.error)
+            else -> null
         }
+
+        private fun mapApiError(error: Error): News = when (error) {
+            RefreshDataError -> News.CityNotFoundError
+            NetworkConnectionError -> News.NetworkConnectionError
+            ResourceNotFoundError -> News.CityNotFoundError
+        }
+    }
+
+    class BootstrapperImpl(private val apiErrors: ApiErrors) : Bootstrapper<Wish> {
+        override fun invoke(): Observable<Wish> = apiErrors().map { Wish.ApiError(it) }
     }
 }
