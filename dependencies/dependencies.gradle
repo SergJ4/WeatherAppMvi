@@ -1,93 +1,102 @@
 ext {
     ver = [
-            android           : "3.2.1",
-            kotlin            : "1.3.11",
-            anko              : "0.10.8",
-            support           : "1.1.0-alpha01",
-            arch              : "2.0.0",
-            rxjava2           : "2.2.4",
-            rxandroid2        : "2.1.0",
-            constraintLayout  : "2.0.0-alpha3",
-            rxpermissions     : "0.9.5",
-            retrofit          : "2.5.0",
-            ciceroneNavigator : "4.0.2",
-            timber            : "4.7.1",
-            gson              : "2.8.5",
-            okhttp3           : "3.12.1",
-            recyclerAdapter   : "5.1.0",
-            glide             : "4.8.0",
-            room              : "2.1.0-alpha03",
-            places            : "16.0.0",
-            multiDex          : "1.0.3",
-            dagger            : "2.20",
+            android          : "3.2.1",
+            kotlin           : "1.3.11",
+            anko             : "0.10.8",
+            support          : "1.1.0-alpha01",
+            arch             : "2.0.0",
+            rxjava2          : "2.2.4",
+            rxandroid2       : "2.1.0",
+            constraintLayout : "2.0.0-alpha3",
+            rxpermissions    : "0.9.5",
+            retrofit         : "2.5.0",
+            ciceroneNavigator: "4.0.2",
+            timber           : "4.7.1",
+            gson             : "2.8.5",
+            okhttp3          : "3.12.1",
+            recyclerAdapter  : "5.1.0",
+            glide            : "4.8.0",
+            room             : "2.1.0-alpha03",
+            places           : "16.0.0",
+            multiDex         : "1.0.3",
+            dagger           : "2.20",
+            mvicore          : "1.1.4"
     ]
 
     //Version
     plugin = [
-            android : "com.android.tools.build:gradle:$ver.android",
-            kotlin  : "org.jetbrains.kotlin:kotlin-gradle-plugin:$ver.kotlin",
+            android: "com.android.tools.build:gradle:$ver.android",
+            kotlin : "org.jetbrains.kotlin:kotlin-gradle-plugin:$ver.kotlin",
     ]
 
     dep = [
-            support            : [
+            support          : [
                     appCompat       : "androidx.appcompat:appcompat:$ver.support",
                     constraintLayout: "androidx.constraintlayout:constraintlayout:$ver.constraintLayout",
+                    design          : "com.google.android.material:material:$ver.support",
+                    recycler        : "androidx.recyclerview:recyclerview:$ver.support"
             ],
 
-            arch               : [
-                    viewmodel  : "androidx.lifecycle:lifecycle-extensions:$ver.arch"
+            arch             : [
+                    viewmodel: "androidx.lifecycle:lifecycle-extensions:$ver.arch"
             ],
 
-            rxjava2            : [
-                    lib           : "io.reactivex.rxjava2:rxjava:$ver.rxjava2",
-                    android       : "io.reactivex.rxjava2:rxandroid:$ver.rxandroid2",
-                    permissions   : "com.tbruyelle.rxpermissions2:rxpermissions:$ver.rxpermissions",
+            rxjava2          : [
+                    lib        : "io.reactivex.rxjava2:rxjava:$ver.rxjava2",
+                    android    : "io.reactivex.rxjava2:rxandroid:$ver.rxandroid2",
+                    permissions: "com.tbruyelle.rxpermissions2:rxpermissions:$ver.rxpermissions",
             ],
 
-            kotlin             : [
+            kotlin           : [
                     lib         : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$ver.kotlin",
                     anko_commons: "org.jetbrains.anko:anko-commons:$ver.anko",
                     anko_design : "org.jetbrains.anko:anko-design:$ver.anko",
                     extensions  : "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$ver.kotlin"
             ],
 
-            ciceroneNavigator  : "ru.terrakok.cicerone:cicerone:$ver.ciceroneNavigator",
+            ciceroneNavigator: "ru.terrakok.cicerone:cicerone:$ver.ciceroneNavigator",
 
-            timber             : "com.jakewharton.timber:timber:$ver.timber",
+            timber           : "com.jakewharton.timber:timber:$ver.timber",
 
-            gson               : "com.google.code.gson:gson:$ver.gson",
+            gson             : "com.google.code.gson:gson:$ver.gson",
 
-            recyclerAdapter    : "eu.davidea:flexible-adapter:$ver.recyclerAdapter",
+            recyclerAdapter  : "eu.davidea:flexible-adapter:$ver.recyclerAdapter",
 
-            retrofit           : [
+            retrofit         : [
                     lib           : "com.squareup.retrofit2:retrofit:$ver.retrofit",
                     gson_converter: "com.squareup.retrofit2:converter-gson:$ver.retrofit",
                     rxjava_adapter: "com.squareup.retrofit2:adapter-rxjava2:$ver.retrofit",
                     interceptor   : "com.squareup.okhttp3:logging-interceptor:$ver.okhttp3"
             ],
 
-            glide              : [
+            glide            : [
                     lib        : "com.github.bumptech.glide:glide:$ver.glide",
                     annotations: "com.github.bumptech.glide:compiler:$ver.glide",
             ],
 
-            room               : [
-                    lib        : "androidx.room:room-runtime:$ver.room",
-                    rx         : "androidx.room:room-rxjava2:$ver.room",
-                    compiler   : "androidx.room:room-compiler:$ver.room"
+            room             : [
+                    lib     : "androidx.room:room-runtime:$ver.room",
+                    rx      : "androidx.room:room-rxjava2:$ver.room",
+                    compiler: "androidx.room:room-compiler:$ver.room"
             ],
 
-            playServices       : [
-                    places     : "com.google.android.gms:play-services-places:$ver.places"
+            playServices     : [
+                    places: "com.google.android.gms:play-services-places:$ver.places"
             ],
 
-            multidex          : "com.android.support:multidex:$ver.multiDex",
+            multidex         : "com.android.support:multidex:$ver.multiDex",
 
-            dagger            : [
-                    lib       : "com.google.dagger:dagger:$ver.dagger",
-                    compiler  : "com.google.dagger:dagger-compiler:$ver.dagger",
-                    android   : "com.google.dagger:dagger-android:$ver.dagger",
-                    androidSupport : "com.google.dagger:dagger-android-support:$ver.dagger",
+            dagger           : [
+                    lib             : "com.google.dagger:dagger:$ver.dagger",
+                    compiler        : "com.google.dagger:dagger-compiler:$ver.dagger",
+                    android         : "com.google.dagger:dagger-android:$ver.dagger",
+                    androidSupport  : "com.google.dagger:dagger-android-support:$ver.dagger",
+                    androidProcessor: "com.google.dagger:dagger-android-processor:$ver.dagger"
+            ],
+
+            mvicore          : [
+                    lib      : "com.github.badoo.mvicore:mvicore:$ver.mvicore",
+                    android  : "com.github.badoo.mvicore:mvicore-android:$ver.mvicore"
             ]
     ]
 }

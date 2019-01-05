@@ -26,16 +26,32 @@ android {
 
 }
 
+kapt {
+    arguments {
+        arg("room.schemaLocation", "$projectDir/schemas".toString())
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(path: ':core')
 
     implementation dep.kotlin.lib
-    implementation dep.support.appCompat
-
-    implementation dep.ciceroneNavigator
-
+    implementation dep.rxjava2.lib
     implementation dep.dagger.lib
+    implementation dep.room.lib
+    implementation dep.room.rx
+
+    implementation dep.gson
+
+    implementation dep.retrofit.lib
+    implementation dep.retrofit.gson_converter
+    implementation dep.retrofit.rxjava_adapter
+    implementation dep.retrofit.interceptor
+    implementation dep.glide.lib
+
+    kapt dep.glide.annotations
+    kapt dep.room.compiler
     kapt dep.dagger.compiler
 }

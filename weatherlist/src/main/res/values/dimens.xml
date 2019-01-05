@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="city_weather_card_height">140dp</dimen>
+    <dimen name="city_weather_card_size_landscape">220dp</dimen>
+    <dimen name="city_weather_detail_card_height">260dp</dimen>
+    <dimen name="city_weather_card_icon_size">60dp</dimen>
+
+    <dimen name="city_detailed_screen_icon_size">80dp</dimen>
+    <dimen name="city_detailed_screen_icon_size_landscape">40dp</dimen>
+    <dimen name="city_title_detailed_screen_size">32sp</dimen>
+    <dimen name="city_title_detailed_screen_size_landscape">18sp</dimen>
+    <dimen name="weather_description_detailed_screen_font_size">24sp</dimen>
+    <dimen name="weather_description_detailed_screen_font_size_landscape">16sp</dimen>
+    <dimen name="temperature_detailed_screen_font_size">24sp</dimen>
+    <dimen name="temperature_detailed_screen_font_size_landscape">14sp</dimen>
+    <dimen name="temperature_detailed_screen_font_size_forecast">16sp</dimen>
+    <dimen name="temperature_detailed_screen_font_size_forecast_landscape">14sp</dimen>
+    <dimen name="pressure_detailed_screen_font_size">24sp</dimen>
+    <dimen name="pressure_detailed_screen_font_size_landscape">14sp</dimen>
+    <dimen name="detailed_card_date_font_size">18sp</dimen>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="snackbar_text_color">#fff</color>
+
+    <color name="primary">#ffc107</color>
+    <color name="primaryDark">#ff8f00</color>
+    <color name="accent">#4fc3f7</color>
+
+    <color name="primary_with_alpha">#8dffc107</color>
+
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+    <color name="light_blue">#60c3e7</color>
+    <color name="dark_blue">#21a0ca</color>
+    <color name="brown">#f99f03</color>
+    <color name="red">#f41667</color>
+</resources>

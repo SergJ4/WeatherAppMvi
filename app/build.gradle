@@ -21,6 +21,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -28,14 +33,19 @@ dependencies {
 
     implementation project(path: ':core')
     implementation project(path: ':repository')
+    implementation project(path: ':weatherlist')
+    implementation project(path: ':weathersingle')
 
     implementation dep.kotlin.lib
     implementation dep.support.appCompat
-    implementation dep.support.constraintLayout
     implementation dep.multidex
     implementation dep.ciceroneNavigator
     implementation dep.dagger.lib
+    implementation dep.dagger.androidSupport
+    implementation dep.arch.viewmodel
+    implementation dep.rxjava2.lib
+    implementation dep.mvicore.lib
 
     kapt dep.dagger.compiler
-
+    kapt dep.dagger.androidProcessor
 }

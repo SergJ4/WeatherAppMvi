@@ -1,42 +1,38 @@
 package com.example.serg.mvicoretest.di
 
+import android.content.Context
 import com.example.core.di.scopes.AppScope
-import com.example.core.interfaces.IApplication
-import com.example.core.interfaces.providers.ApplicationProvider
-import com.example.repository.di.DaggerRepoComponent
+import com.example.core.interfaces.ImageLoader
+import com.example.core.interfaces.Logger
+import com.example.core.interfaces.WeatherRepository
 import com.example.repository.di.RepoComponent
 import com.example.serg.mvicoretest.App
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 
 @AppScope
 @Component(
-    modules = [AppModule::class],
+    modules = [
+        AndroidInjectionModule::class,
+        ActivityModule::class,
+        AppModule::class
+    ],
     dependencies = [RepoComponent::class]
 )
-interface AppComponent : ApplicationProvider {
+interface AppComponent {
     fun inject(app: App)
 
-    fun mainActivity(): MainActivityComponent.Builder
+    fun weatherRepository(): WeatherRepository
 
-    companion object {
-        fun init(app: IApplication): AppComponent {
-            val repoComponent = DaggerRepoComponent
-                .builder()
-                .build()
+    fun logger(): Logger
 
-            return DaggerAppComponent
-                .builder()
-                .app(app)
-                .repoComponent(repoComponent)
-                .build()
-        }
-    }
+    fun imageLoader(): ImageLoader
 
     @Component.Builder
     interface Builder {
         @BindsInstance
-        fun app(context: IApplication): Builder
+        fun app(context: Context): Builder
 
         fun repoComponent(repoComponent: RepoComponent): Builder
 
