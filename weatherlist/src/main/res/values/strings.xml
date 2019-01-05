@@ -1,4 +1,5 @@
 <resources>
     <string name="pressure_units">mmHg St</string>
     <string name="speed_units">m/s</string>
+    <string name="error_choosing_city">Error while choosing city</string>
 </resources>

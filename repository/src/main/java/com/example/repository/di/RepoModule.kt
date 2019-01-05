@@ -7,16 +7,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.core.di.scopes.RepoScope
-import com.example.core.interfaces.ApiErrors
-import com.example.core.interfaces.ImageLoader
-import com.example.core.interfaces.Logger
-import com.example.core.interfaces.WeatherRepository
+import com.example.core.interfaces.*
 import com.example.repository.BuildConfig
 import com.example.repository.ImageLoaderImpl
-import com.example.repository.datasource.api.ApiDataSource
-import com.example.repository.datasource.api.ConnectivityInterceptor
-import com.example.repository.datasource.api.TranslatorApi
-import com.example.repository.datasource.api.WeatherApi
+import com.example.repository.datasource.api.*
 import com.example.repository.datasource.db.DB_NAME
 import com.example.repository.datasource.db.DbDataSource
 import com.example.repository.datasource.db.WeatherDao
@@ -84,12 +78,12 @@ class RepoModule {
 
     @Provides
     @RepoScope
-    fun weatherApi(@Named(WEATHER_RETROFIT) retrofit: Retrofit) =
+    fun weatherApi(@Named(WEATHER_RETROFIT) retrofit: Retrofit): WeatherApi =
         retrofit.create(WeatherApi::class.java)
 
     @Provides
     @RepoScope
-    fun translatorApi(@Named(TRANSLATOR_RETROFIT) retrofit: Retrofit) =
+    fun translatorApi(@Named(TRANSLATOR_RETROFIT) retrofit: Retrofit): TranslatorApi =
         retrofit.create(TranslatorApi::class.java)
 
     @Provides
@@ -161,4 +155,8 @@ class RepoModule {
     fun provideImageLoader(): ImageLoader {
         return ImageLoaderImpl()
     }
+
+    @Provides
+    @RepoScope
+    fun provideTranslator(translatorApi: TranslatorApi): Translator = TranslatorImpl(translatorApi)
 }

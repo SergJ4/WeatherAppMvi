@@ -5,6 +5,7 @@ import com.example.core.di.CoreComponent
 import com.example.core.di.scopes.RepoScope
 import com.example.core.interfaces.ImageLoader
 import com.example.core.interfaces.Logger
+import com.example.core.interfaces.Translator
 import com.example.core.interfaces.WeatherRepository
 import dagger.BindsInstance
 import dagger.Component
@@ -21,6 +22,8 @@ interface RepoComponent {
     fun logger(): Logger
 
     fun imageLoader(): ImageLoader
+
+    fun translator(): Translator
 
     @Component.Builder
     interface Builder {

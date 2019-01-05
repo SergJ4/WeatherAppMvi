@@ -1,4 +1,5 @@
 <resources>
     <string name="pressure_units">мм.рт.ст</string>
     <string name="speed_units">м/с</string>
+    <string name="error_choosing_city">Ошибка при выборе города</string>
 </resources>

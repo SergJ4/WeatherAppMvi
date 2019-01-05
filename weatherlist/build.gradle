@@ -46,6 +46,7 @@ dependencies {
     implementation dep.mvicore.android
     implementation dep.recyclerAdapter
     implementation dep.rxjava2.lib
+    implementation dep.playServices.places
 
     kapt dep.dagger.compiler
     kapt dep.dagger.androidProcessor
