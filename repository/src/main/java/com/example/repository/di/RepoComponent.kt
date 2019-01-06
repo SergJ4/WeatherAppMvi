@@ -3,10 +3,7 @@ package com.example.repository.di
 import android.content.Context
 import com.example.core.di.CoreComponent
 import com.example.core.di.scopes.RepoScope
-import com.example.core.interfaces.ImageLoader
-import com.example.core.interfaces.Logger
-import com.example.core.interfaces.Translator
-import com.example.core.interfaces.WeatherRepository
+import com.example.core.interfaces.*
 import dagger.BindsInstance
 import dagger.Component
 
@@ -24,6 +21,8 @@ interface RepoComponent {
     fun imageLoader(): ImageLoader
 
     fun translator(): Translator
+
+    fun apiErrors(): ApiErrors
 
     @Component.Builder
     interface Builder {
