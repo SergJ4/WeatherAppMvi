@@ -8,5 +8,6 @@ class DetailsFragmentBindings(lifecycleOwner: LifecycleOwner) :
     override fun setup(view: DetailsFragment) {
         binder.bind(view to view.viewModel.input)
         binder.bind(view.viewModel.output to view)
+        binder.bind(view.viewModel.news to view.newsConsumer)
     }
 }

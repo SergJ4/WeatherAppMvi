@@ -20,10 +20,15 @@ class DetailsFragment : BaseFragment(),
     @Inject
     internal lateinit var viewModel: DetailsFragmentViewModel
 
+    internal val cityId: Long
+        get() = arguments!![CITY_ID_ARG] as Long
+
     private val adapter: FlexibleAdapter<IFlexible<*>> =
         FlexibleAdapter(null, null, true)
 
     override val layoutRes: Int = R.layout.city_weather_detail_layout
+
+    internal val newsConsumer: Consumer<String> = Consumer { showMessage(it) }
 
     sealed class UiEvent {
         object Refresh : UiEvent()

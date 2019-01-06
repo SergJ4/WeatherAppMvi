@@ -3,4 +3,5 @@
     <color name="details_card_background">@color/primary_with_alpha</color>
     <color name="detail_weather_city_title_color">@color/white</color>
     <color name="detail_weather_temperature_color">@color/white</color>
+    <color name="date_font_color">@color/white</color>
 </resources>

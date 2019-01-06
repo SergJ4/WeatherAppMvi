@@ -1,10 +1,10 @@
 package com.example.weathersingle.adapter
 
-import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.extensions.toFormattedString
 import com.example.core.interfaces.ImageLoader
+import com.example.core.interfaces.Strings
 import com.example.core.models.Weather
 import com.example.weathersingle.R
 import eu.davidea.flexibleadapter.FlexibleAdapter
@@ -15,7 +15,7 @@ import java.util.*
 class ForecastDetailsItem(
     private val weather: Weather,
     internal val imageLoader: ImageLoader,
-    internal val context: Context
+    private val strings: Strings
 ) : AbstractFlexibleItem<ForecastDetailsViewHolder>() {
 
     internal val weatherDate: String
@@ -38,7 +38,7 @@ class ForecastDetailsItem(
         }
     internal val pressure: String
         get() {
-            return "${weather.pressure.toInt()} ${context.getString(R.string.pressure_units)}"
+            return "${weather.pressure.toInt()} ${strings.get(R.string.pressure_units)}"
         }
     internal val humidity: String
         get() {
@@ -46,7 +46,7 @@ class ForecastDetailsItem(
         }
     internal val wind: String
         get() {
-            return "${weather.windSpeed} ${context.getString(R.string.speed_units)}"
+            return "${weather.windSpeed} ${strings.get(R.string.speed_units)}"
         }
 
     override fun bindViewHolder(

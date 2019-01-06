@@ -5,4 +5,6 @@ interface Strings {
     fun errorChoosingCityString(): String
 
     fun unknownErrorString(): String
+
+    fun get(stringRes: Int): String
 }

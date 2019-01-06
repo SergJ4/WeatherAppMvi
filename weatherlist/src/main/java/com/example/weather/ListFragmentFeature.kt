@@ -51,11 +51,10 @@ class ListFragmentFeature @Inject constructor(
     }
 
     sealed class Effect {
-        object Loading : Effect()
+        data class Loading(val isLoading: Boolean) : Effect()
         data class DataLoaded(val cities: List<City>) : Effect()
         object ErrorChoosingCity : Effect()
         object CityAdded : Effect()
-        object NoNeedToAct : Effect()
     }
 
     data class State(
@@ -85,27 +84,26 @@ class ListFragmentFeature @Inject constructor(
                     .toObservable()
                     .subscribeOn(SchedulersProvider.io())
                     .observeOn(SchedulersProvider.ui())
-                    .startWith(Observable.just(Effect.Loading))
+                    .startWith(Observable.just(Effect.Loading(true)))
 
                 is Wish.CityChosen -> addCity(wish.city)
                     .subscribeOn(SchedulersProvider.io())
                     .observeOn(SchedulersProvider.ui())
                     .map { Effect.CityAdded as Effect }
-                    .startWith(Effect.Loading)
+                    .startWith(Effect.Loading(true))
                     .onErrorReturn { Effect.ErrorChoosingCity }
 
-                is Wish.ApiError -> Observable.just(Effect.NoNeedToAct)
+                is Wish.ApiError -> Observable.just(Effect.Loading(false))
             }
     }
 
     class ReducerImpl : Reducer<State, Effect> {
         override fun invoke(state: State, effect: Effect): State =
             when (effect) {
-                is Effect.Loading -> state.copy(list = state.list, isLoading = true)
+                is Effect.Loading -> state.copy(list = state.list, isLoading = effect.isLoading)
                 is Effect.DataLoaded -> state.copy(list = effect.cities, isLoading = false)
                 Effect.ErrorChoosingCity -> state.copy(list = state.list, isLoading = false)
                 Effect.CityAdded -> state.copy(list = state.list, isLoading = false)
-                Effect.NoNeedToAct -> state
             }
     }
 
@@ -117,9 +115,8 @@ class ListFragmentFeature @Inject constructor(
         }
 
         private fun mapApiError(error: Error): News = when (error) {
-            RefreshDataError -> News.CityNotFoundError
+            RefreshDataError, ResourceNotFoundError -> News.CityNotFoundError
             NetworkConnectionError -> News.NetworkConnectionError
-            ResourceNotFoundError -> News.CityNotFoundError
         }
     }
 

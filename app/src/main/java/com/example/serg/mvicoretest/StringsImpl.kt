@@ -9,4 +9,5 @@ class StringsImpl(private val appContext: Context) : Strings {
 
     override fun unknownErrorString(): String = appContext.getString(R.string.unknown_error)
 
+    override fun get(stringRes: Int): String = appContext.getString(stringRes)
 }
