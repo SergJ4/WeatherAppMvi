@@ -9,6 +9,7 @@ import io.reactivex.ObservableSource
 import io.reactivex.Observer
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.city_weather_detail_layout.*
+import javax.inject.Inject
 
 internal const val CITY_ID_ARG = "city id"
 
@@ -16,6 +17,8 @@ class DetailsFragment : BaseFragment(),
     ObservableSource<DetailsFragment.UiEvent>,
     Consumer<DetailsFragment.Model> {
 
+    @Inject
+    internal lateinit var viewModel: DetailsFragmentViewModel
 
     private val adapter: FlexibleAdapter<IFlexible<*>> =
         FlexibleAdapter(null, null, true)
@@ -34,6 +37,7 @@ class DetailsFragment : BaseFragment(),
         if (weatherList.adapter == null) {
             weatherList.adapter = adapter
         }
+        DetailsFragmentBindings(viewLifecycleOwner).setup(this)
     }
 
     override fun subscribe(observer: Observer<in UiEvent>) {

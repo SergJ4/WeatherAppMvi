@@ -38,6 +38,8 @@ dependencies {
     implementation dep.support.constraintLayout
     implementation dep.rxjava2.lib
     implementation dep.arch.viewmodel
+    implementation dep.mvicore.lib
+    implementation dep.mvicore.android
 
     implementation dep.dagger.lib
     implementation dep.dagger.androidSupport
