@@ -12,3 +12,4 @@ Technologies stack:
 - MVICore (https://github.com/badoo/MVICore)
 - RxJava2
 - Retrofit
+- Cicerone Navigator (https://github.com/terrakok/Cicerone)
