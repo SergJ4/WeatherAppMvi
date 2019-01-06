@@ -1,0 +1,4 @@
+<resources>
+    <string name="pressure_units">мм.рт.ст</string>
+    <string name="speed_units">м/с</string>
+</resources>

@@ -1,2 +1,4 @@
 <resources>
+    <string name="pressure_units">mmHg St</string>
+    <string name="speed_units">m/s</string>
 </resources>

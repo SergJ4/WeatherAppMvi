@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="16dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/details_card_background"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/cityTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="2"
+            android:paddingStart="48dp"
+            android:paddingEnd="48dp"
+            android:textColor="@color/detail_weather_city_title_color"
+            android:textSize="@dimen/city_title_detailed_screen_size"
+            android:transitionName="detailedCityTitle"
+            app:layout_constraintBottom_toTopOf="@+id/weatherIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Saint-Petersburg" />
+
+        <ImageView
+            android:id="@+id/weatherIcon"
+            android:layout_width="@dimen/city_detailed_screen_icon_size"
+            android:layout_height="@dimen/city_detailed_screen_icon_size"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/weatherDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cityTitle"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/weatherDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/weather_description_detailed_screen_font_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weatherIcon"
+            tools:text="Ясно" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/temperatureLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/weatherDescription">
+
+            <TextView
+                android:id="@+id/currentTemperature"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_weather_temperature_color"
+                android:textSize="@dimen/temperature_detailed_screen_font_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/halfScreen"
+                app:layout_constraintTop_toBottomOf="@+id/temperatureIcon"
+                tools:text="+34℃" />
+
+            <ImageView
+                android:id="@+id/temperatureIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/ic_thermometer"
+                app:layout_constraintBottom_toTopOf="@id/currentTemperature"
+                app:layout_constraintEnd_toEndOf="@id/currentTemperature"
+                app:layout_constraintStart_toStartOf="@id/currentTemperature"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/pressureIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/ic_barometer"
+                app:layout_constraintBottom_toTopOf="@id/currentPressure"
+                app:layout_constraintEnd_toEndOf="@+id/currentPressure"
+                app:layout_constraintStart_toStartOf="@+id/currentPressure"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/currentPressure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_weather_temperature_color"
+                android:textSize="@dimen/pressure_detailed_screen_font_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/halfScreen"
+                app:layout_constraintTop_toBottomOf="@id/pressureIcon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                tools:text="752 мм.рт.ст." />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/halfScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/temperatureLayout">
+
+            <TextView
+                android:id="@+id/currentHumidity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_weather_temperature_color"
+                android:textSize="@dimen/temperature_detailed_screen_font_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/halfScreen2"
+                app:layout_constraintTop_toBottomOf="@+id/humidityIcon"
+                tools:text="54%" />
+
+            <ImageView
+                android:id="@+id/humidityIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/ic_humidity"
+                app:layout_constraintBottom_toTopOf="@id/currentHumidity"
+                app:layout_constraintEnd_toEndOf="@id/currentHumidity"
+                app:layout_constraintStart_toStartOf="@id/currentHumidity"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/windIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/ic_wind"
+                app:layout_constraintBottom_toTopOf="@id/currentWind"
+                app:layout_constraintEnd_toEndOf="@+id/currentWind"
+                app:layout_constraintStart_toStartOf="@+id/currentWind"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/currentWind"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/detail_weather_temperature_color"
+                android:textSize="@dimen/pressure_detailed_screen_font_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/halfScreen2"
+                app:layout_constraintTop_toBottomOf="@id/windIcon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                tools:text="2 м/с" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/halfScreen2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
