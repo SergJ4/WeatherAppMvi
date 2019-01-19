@@ -1,3 +1,3 @@
 <resources>
-    <string name="app_name">Core</string>
+    <string name="unknown_error">Unknown error happened, please try later</string>
 </resources>

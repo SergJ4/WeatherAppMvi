@@ -1,9 +1,10 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
-
-
 
     defaultConfig {
         minSdkVersion 19
@@ -27,8 +28,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+    implementation dep.kotlin.lib
+    implementation dep.kotlin.anko_commons
+    implementation dep.support.appCompat
+    implementation dep.support.design
+    implementation dep.timber
+    implementation dep.rxjava2.lib
+    implementation dep.rxjava2.android
+
+    implementation dep.dagger.androidSupport
+    implementation dep.dagger.lib
+    kapt dep.dagger.compiler
 }

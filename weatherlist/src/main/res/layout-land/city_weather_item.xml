@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cityWeatherCard"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/city_weather_card_size_landscape"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/primary_with_alpha"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/cityTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/weather_city_card_title_color"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Москва" />
+
+        <ImageView
+            android:id="@+id/weatherIcon"
+            android:layout_width="@dimen/city_weather_card_icon_size"
+            android:layout_height="@dimen/city_weather_card_icon_size"
+            app:layout_constraintBottom_toTopOf="@id/temperatureText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/weatherDescription"
+            app:layout_constraintTop_toBottomOf="@id/cityTitle"
+            android:layout_marginStart="16dp"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/weatherDescription"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            app:autoSizeMaxTextSize="16sp"
+            app:autoSizeMinTextSize="8sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
+            android:textColor="@color/weather_city_card_title_color"
+            app:layout_constraintBottom_toBottomOf="@id/weatherIcon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/weatherIcon"
+            app:layout_constraintTop_toTopOf="@id/weatherIcon"
+            tools:text="Облачно, без осадков" />
+
+        <TextView
+            android:id="@+id/temperatureText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weatherIcon"
+            tools:text="+18 \u2103" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
